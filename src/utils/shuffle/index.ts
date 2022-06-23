@@ -1,7 +1,8 @@
 
 /**
  * 
- * an array shuffle using the fisher-yates shuffle algorithm
+ * an array shuffler using the fisher-yates shuffle algorithm
+ * **mutates original array
  * @param array an array that you want shuffled
  */
 function shuffle(array: any) {
