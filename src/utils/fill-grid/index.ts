@@ -1,5 +1,6 @@
 import { GRID, NUMBERS } from "typings";
-import { shuffle, isInRow, isInCol } from "utils";
+import { shuffle, isInRow, isInCol, identifySquare, isInSquare } from "utils";
+
 
 const gridExample = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -34,21 +35,24 @@ function fillGrid(grid: GRID) {
         if (!isInRow({ grid, row, value })) {
           if (!isInCol({ grid, col, value })) {
             //is it not in the grid square?
-            const square = [
-              [0, 0, 0],
-              [0, 0, 0],
-              [0, 0, 0],
-            ];
+            const square = identifySquare({grid, row, col});
+            if(!isInSquare({value, square})) {
+                //wait - if it's not in row, col, or square, it's safe to place, right?
+                grid[row][col] = value;
+                //if grid is full, we stop and return,
+                // if(true) {
+                //     return true;
+                // }
+                // else if(fillGrid(grid)){
+                //     return true
+                // };
+                //otherwise, we run full grid again.
+            }
           }
         }
-
-        //if it meets none of these conditions put it in the square
-        grid[row][col] = value;
-        //if grid is full, we stop and return,
-        //otherwise, we run full grid again.
       }
 
-      //recursive things
+      //recursive things - er call fill grid again if grid ain't full?
       break;
     }
   }

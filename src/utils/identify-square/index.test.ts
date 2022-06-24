@@ -1,4 +1,4 @@
-import identifyWorkingSquare from ".";
+import identifySquare from ".";
 import { GRID } from "typings";
 
 describe("identifySquare", () => {
@@ -14,17 +14,17 @@ describe("identifySquare", () => {
       [2, 8, 5, 9, 6, 3, 7, 1, 4],
       [3, 1, 9, 4, 2, 7, 8, 5, 6],
     ];
-    expect(identifyWorkingSquare({ grid, col: 2, row: 2 })).toStrictEqual([
+    expect(identifySquare({ grid, col: 2, row: 2 })).toStrictEqual([
       [8, 4, 2],
       [5, 3, 7],
       [6, 9, 1],
     ]);
-    expect(identifyWorkingSquare({ grid, col: 5, row: 5 })).toStrictEqual([
+    expect(identifySquare({ grid, col: 5, row: 5 })).toStrictEqual([
       [8, 4, 5],
       [1, 9, 2],
       [3, 7, 6],
     ]);
-    expect(identifyWorkingSquare({ grid, col: 8, row: 8 })).toStrictEqual([
+    expect(identifySquare({ grid, col: 8, row: 8 })).toStrictEqual([
       [2, 3, 9],
       [7, 1, 4],
       [8, 5, 6],

@@ -13,7 +13,7 @@ interface IInterface {
  * 
  * @returns 
  */
-function identifyWorkingSquare({ grid, row, col }: IInterface): SQUARE {
+function identifySquare({ grid, row, col }: IInterface): SQUARE {
   const square = [];
 
   if (row < 3) {
@@ -62,4 +62,4 @@ function identifyWorkingSquare({ grid, row, col }: IInterface): SQUARE {
   return square as SQUARE;
 }
 
-export default identifyWorkingSquare;
+export default identifySquare;
