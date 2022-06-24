@@ -1,10 +1,21 @@
-import React, { FC, Children } from 'react'
+import React, { FC, Children, useCallback, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { Dispatch, AnyAction } from "redux";
 
-import Block from './block'
-import { Container, Row } from './styles'
+import Block from "./block";
+import { Container, Row } from "./styles";
+
+import { createGrid } from "reducers";
 
 const Grid: FC = () => {
+  const dispatch = useDispatch<Dispatch<AnyAction>>();
+  const create = useCallback(() => dispatch(createGrid()), [dispatch]);
   // Other stuff on the way
+  // const gridExample = createFullGrid();
+  // console.log(gridExample);
+  useEffect(() => {
+    create();
+  }, [create]);
 
   return (
     <Container data-cy="grid-container">
@@ -20,7 +31,7 @@ const Grid: FC = () => {
         ))
       )}
     </Container>
-  )
-}
+  );
+};
 
-export default Grid
+export default Grid;

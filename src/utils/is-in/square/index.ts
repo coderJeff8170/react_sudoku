@@ -7,7 +7,7 @@ interface IInput {
 
 /**
  * a function to check if the value exists in the given 3x3 square
- * @param object containing a value and a given 3x3 square
+ * @param input object containing a value and a given 3x3 square
  * @returns boolean
  */
 function isInSquare({value, square}: IInput): boolean {

@@ -3,7 +3,7 @@ import { GRID } from 'typings'
 /**
  * a function to check whether a grid has any zeroes in it or not, thereby determining whether grid is fully filled with legit values...
  * @param grid : 9x9 sudoku grid;
- * @returns boolean
+ * @returns boolean - false if any zeroes, true if filled with numbers from 1 - 9
  */
 function checkGrid(grid: GRID): boolean {
     //do things
