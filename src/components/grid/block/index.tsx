@@ -1,14 +1,68 @@
 import React, { FC } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Dispatch, AnyAction } from "redux";
+import mousetrap from "react-hook-mousetrap";
+
+import { IReducer, selectBlock } from "reducers";
+import { INDEX, N } from "typings";
 
 import { Container } from "./styles";
+import useMousetrap from "react-hook-mousetrap";
 
 interface IProps {
-  colIndex: number;
-  rowIndex: number;
+  active?: boolean;
+  colIndex: INDEX;
+  rowIndex: INDEX;
+}
+
+interface IState {
+  isActive: boolean;
+  value: N;
 }
 
 const Block: FC<IProps> = ({ colIndex, rowIndex }) => {
-  return <Container data-cy={`block-${rowIndex}-${colIndex}`} />;
+  const state = useSelector<IReducer, IState>(({ grid, selectedBlock }) => ({
+    isActive: selectedBlock
+      ? selectedBlock[0] === rowIndex && selectedBlock[1] === colIndex
+      : false,
+    value: grid ? grid[rowIndex][colIndex] : 0,
+    // value: 0
+  }));
+  const dispatch = useDispatch<Dispatch<AnyAction>>();
+  function handleClick() {
+    if (!state.isActive) dispatch(selectBlock([rowIndex, colIndex]));
+  }
+
+  function moveDown() {
+    console.log("down");
+  }
+
+  function moveUp() {
+    console.log("up");
+  }
+
+  function moveRight() {
+    console.log("right");
+  }
+
+  function moveLeft() {
+    console.log("left");
+  }
+
+  useMousetrap("down", moveDown);
+  useMousetrap("up", moveUp);
+  useMousetrap("right", moveRight);
+  useMousetrap("left", moveLeft);
+
+  return (
+    <Container
+      active={state.isActive}
+      data-cy={`block-${rowIndex}-${colIndex}`}
+      onClick={handleClick}
+    >
+      {state.value === 0 ? "" : state.value}
+    </Container>
+  );
 };
 
 export default Block;
