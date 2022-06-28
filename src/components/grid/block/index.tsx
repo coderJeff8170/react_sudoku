@@ -1,13 +1,12 @@
 import React, { FC } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Dispatch, AnyAction } from "redux";
-import mousetrap from "react-hook-mousetrap";
 
 import { IReducer, selectBlock } from "reducers";
 import { INDEX, N } from "typings";
 
 import { Container } from "./styles";
-import useMousetrap from "react-hook-mousetrap";
+// import useMousetrap from "react-hook-mousetrap";
 
 interface IProps {
   active?: boolean;
@@ -33,26 +32,7 @@ const Block: FC<IProps> = ({ colIndex, rowIndex }) => {
     if (!state.isActive) dispatch(selectBlock([rowIndex, colIndex]));
   }
 
-  function moveDown() {
-    console.log("down");
-  }
 
-  function moveUp() {
-    console.log("up");
-  }
-
-  function moveRight() {
-    console.log("right");
-  }
-
-  function moveLeft() {
-    console.log("left");
-  }
-
-  useMousetrap("down", moveDown);
-  useMousetrap("up", moveUp);
-  useMousetrap("right", moveRight);
-  useMousetrap("left", moveLeft);
 
   return (
     <Container
