@@ -6,18 +6,20 @@ import Block from "./block";
 import { Container, Row } from "./styles";
 
 import { createGrid, IReducer, selectBlock, fillBlock } from "reducers";
-import { BLOCK_COORDS, INDEX, N, NUMBERS } from "typings";
+import { BLOCK_COORDS, GRID, INDEX, N, NUMBERS } from "typings";
 import useMousetrap from "react-hook-mousetrap";
 
 interface IState {
   selectedBlock?: BLOCK_COORDS;
+  solvedGrid?: GRID;
   selectedValue: N;
 }
 
 const Grid: FC = () => {
   const state = useSelector<IReducer, IState>(
-    ({ selectedBlock, workingGrid }) => ({
+    ({ selectedBlock, solvedGrid, workingGrid }) => ({
       selectedBlock: selectedBlock,
+      solvedGrid: solvedGrid,
       selectedValue:
         workingGrid && selectedBlock
           ? workingGrid[selectedBlock[0]][selectedBlock[1]]
@@ -110,8 +112,11 @@ const Grid: FC = () => {
   useMousetrap("left", moveLeft);
 
   useEffect(() => {
-    create();
-  }, [create]);
+    if(!state.solvedGrid) {
+      create();
+    }
+    
+  }, [create, state.solvedGrid]);
 
   return (
     <Container data-cy="grid-container">
